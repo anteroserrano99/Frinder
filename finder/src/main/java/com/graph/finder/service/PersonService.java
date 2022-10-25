@@ -1,5 +1,6 @@
 package com.graph.finder.service;
 
+import com.graph.finder.controller.Sex;
 import com.graph.finder.model.Person;
 import com.graph.finder.repository.PersonRepository;
 import java.util.List;
@@ -22,8 +23,19 @@ public class PersonService {
     return personRepository.getAllPerson();
   }
 
-  public Person createPerson(int born, String name){
+  public List<Person> getFriends(String name){
 
-    return personRepository.insertPerson(born, name);
+    return personRepository.getPersonFriends(name);
+  }
+
+
+  public Person createPerson(int born, String name, Sex sex){
+
+    return personRepository.insertPerson(born, name, sex.name());
+  }
+
+  public boolean addFriend(String name, String friendName){
+
+    return personRepository.addFriend(name, friendName);
   }
 }

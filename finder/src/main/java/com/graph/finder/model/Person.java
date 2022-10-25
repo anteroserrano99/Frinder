@@ -7,6 +7,7 @@ import org.springframework.data.neo4j.core.schema.Node;
 @Node("Person")
 @Data
 public class Person {
+
   @Id
   private final String name;
   private final Integer born;
