@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "4164bca3-ea47-4d86-a041-b00a7d97d117",
+		"name": "Frinder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all people",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create person",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persons/create?born=1999&name=antero&sex=MALE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persons",
+						"create"
+					],
+					"query": [
+						{
+							"key": "born",
+							"value": "1999"
+						},
+						{
+							"key": "name",
+							"value": "antero"
+						},
+						{
+							"key": "sex",
+							"value": "MALE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create person friend",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persons/create?born=2000&name=ruben&sex=MALE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persons",
+						"create"
+					],
+					"query": [
+						{
+							"key": "born",
+							"value": "2000"
+						},
+						{
+							"key": "name",
+							"value": "ruben"
+						},
+						{
+							"key": "sex",
+							"value": "MALE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get person friends",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persons/:name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persons",
+						":name"
+					],
+					"variable": [
+						{
+							"key": "name",
+							"value": "antero"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add friend",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persons/:name/addFriend?friendName=ruben",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persons",
+						":name",
+						"addFriend"
+					],
+					"query": [
+						{
+							"key": "friendName",
+							"value": "ruben"
+						}
+					],
+					"variable": [
+						{
+							"key": "name",
+							"value": "antero"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

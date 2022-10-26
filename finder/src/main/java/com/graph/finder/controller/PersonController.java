@@ -7,6 +7,9 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,29 +32,27 @@ public class PersonController {
   }
 
   @GetMapping(value = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Person> getFriends(@PathParam("name") String name) {
+  public List<Person> getFriends(
+      @PathVariable("name") String name) {
 
     return personService.getFriends(name);
 
   }
 
-
   @GetMapping(value = "/{name}/addFriend", produces = MediaType.APPLICATION_JSON_VALUE)
-  public boolean addFriend(@PathParam("name") String person, @RequestParam("name") String friendName) {
+  public boolean addFriend(
+      @PathVariable("name") String name,
+      @RequestParam("friendName") String friendName) {
 
-    return personService.addFriend(person, friendName);
+    return personService.addFriend(name, friendName);
 
   }
 
-
-
-
-  @GetMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
   public Person create(
       @RequestParam("born") int born,
       @RequestParam("name") String name,
-      @RequestParam("sex") Sex sex
-  ) {
+      @RequestParam("sex") Sex sex) {
 
     return personService.createPerson(born, name, sex);
 
