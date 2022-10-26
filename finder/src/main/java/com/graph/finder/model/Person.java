@@ -19,5 +19,41 @@ public class Person {
     this.name = name;
     this.sex = sex;
   }
+
+  public static PersonBuilder builder() {
+    return new PersonBuilder();
+  }
+
+  public static class PersonBuilder{
+
+    private String name;
+    private Integer born;
+    private Sex sex;
+
+    public PersonBuilder sex(Sex sex){
+      this.sex = sex;
+      return this;
+    }
+
+    public PersonBuilder name(String name){
+      this.name = name;
+      return this;
+    }
+
+    public PersonBuilder born(int born){
+      this.born = born;
+      return this;
+    }
+
+
+    public Person build(){
+      return new Person(born, name, sex);
+    }
+
+  }
+
+
+
+
 }
 
