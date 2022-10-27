@@ -1,6 +1,6 @@
 package com.graph.finder.model;
 
-import com.graph.finder.controller.Sex;
+import java.util.Objects;
 import lombok.Data;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
@@ -54,6 +54,9 @@ public class Person {
 
 
 
-
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, born, sex);
+  }
 }
 
