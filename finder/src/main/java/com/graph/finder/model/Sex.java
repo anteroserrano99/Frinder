@@ -1,4 +1,4 @@
-package com.graph.finder.controller;
+package com.graph.finder.model;
 
 public enum Sex {
 
