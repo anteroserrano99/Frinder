@@ -1,15 +1,11 @@
 package com.graph.finder;
 
 
-import com.graph.finder.controller.Sex;
 import com.graph.finder.model.Person;
 import com.graph.finder.repository.PersonRepository;
 import com.graph.finder.test.repository.PersonTestRepository;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,11 +31,11 @@ class FinderApplicationTests {
   @Test
   void contextLoads() throws Exception {
 
-    final List<Person> allPerson = RandomUtilities.generatePersons("L1", 50);
+    final List<Person> allPerson = RandomUtilities.generatePersons("L1", 12);
 
 		persistPersonList(allPerson);
 
-		int relationships = getCustomRelationshipNumber(allPerson.size(), 0.05);
+		int relationships = getCustomRelationshipNumber(allPerson.size(), 0.25);
 
 		persistRandomRelationShips(allPerson, relationships);
 
@@ -53,7 +49,12 @@ class FinderApplicationTests {
 
 			final Person p1 = RandomUtilities.getRandomElementFromList(personList);
 
-			final Person p2 = RandomUtilities.getRandomElementFromList(personList);
+
+			Person p2 = RandomUtilities.getRandomElementFromList(personList);
+
+			while (p1.getName().equals(p2.getName())) {
+				p2 = RandomUtilities.getRandomElementFromList(personList);
+			}
 
 			personRepository.addFriend(p1.getName(), p2.getName());
 		}
