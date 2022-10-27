@@ -1,9 +1,10 @@
 package utilities;
 
-import com.graph.finder.controller.Sex;
+import com.graph.finder.model.Sex;
 import com.graph.finder.model.Person;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class RandomUtilities {
@@ -44,9 +45,12 @@ public class RandomUtilities {
 
   private static Person generateRandomPerson(String namePrefix, int amount) throws Exception {
 
+    final String name = namePrefix + "-" + RANDOM.nextInt(amount);
+    final int born = RANDOM.nextInt(2022);
+
     return Person.builder()
-        .born(RANDOM.nextInt(2022))
-        .name(namePrefix + "-" +RANDOM.nextInt(amount))
+        .born(born)
+        .name(name + Objects.hash(name, born))
         .sex(getRandomEnum(Sex.class))
         .build();
   }
