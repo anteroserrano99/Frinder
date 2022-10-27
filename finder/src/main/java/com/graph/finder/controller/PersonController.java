@@ -1,15 +1,14 @@
 package com.graph.finder.controller;
 
 import com.graph.finder.model.Person;
+import com.graph.finder.model.Sex;
 import com.graph.finder.service.PersonService;
 import java.util.List;
-import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +44,16 @@ public class PersonController {
       @RequestParam("friendName") String friendName) {
 
     return personService.addFriend(name, friendName);
+
+  }
+
+  @GetMapping(value = "/{name}/deep", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Person> getFriendsByDepth(
+      @PathVariable("name") String name,
+      @RequestParam(name = "minDepth", defaultValue = "1") int minDepth,
+      @RequestParam(name = "maxDepth", defaultValue = "1") int maxDepth) {
+
+    return personService.getFriendByDepth(name, minDepth, maxDepth);
 
   }
 

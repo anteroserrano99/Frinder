@@ -1,6 +1,6 @@
 package com.graph.finder.service;
 
-import com.graph.finder.controller.Sex;
+import com.graph.finder.model.Sex;
 import com.graph.finder.model.Person;
 import com.graph.finder.repository.PersonRepository;
 import java.util.List;
@@ -37,5 +37,10 @@ public class PersonService {
   public boolean addFriend(String name, String friendName){
 
     return personRepository.addFriend(name, friendName);
+  }
+
+  public List<Person> getFriendByDepth(String name, int minDepth, int maxDepth){
+
+    return personRepository.getFriendsByDepth(name, minDepth, maxDepth);
   }
 }
