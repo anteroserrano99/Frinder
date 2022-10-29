@@ -1,6 +1,8 @@
 package com.graph.finder.model;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import lombok.Data;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
@@ -13,11 +15,14 @@ public class Person {
   private final String name;
   private final Integer born;
   private final Sex sex;
+  private final Set<Sex> preferences;
 
-  public Person(Integer born, String name, Sex sex) {
+  public Person(Integer born, String name, Sex sex,
+      Set<Sex> preferences) {
     this.born = born;
     this.name = name;
     this.sex = sex;
+    this.preferences = preferences;
   }
 
   public static PersonBuilder builder() {
@@ -29,6 +34,7 @@ public class Person {
     private String name;
     private Integer born;
     private Sex sex;
+    private Set<Sex> preferences;
 
     public PersonBuilder sex(Sex sex){
       this.sex = sex;
@@ -45,9 +51,14 @@ public class Person {
       return this;
     }
 
+    public PersonBuilder preferences(Set<Sex> preferences){
+      this.preferences = preferences;
+      return this;
+    }
+
 
     public Person build(){
-      return new Person(born, name, sex);
+      return new Person(born, name, sex, preferences);
     }
 
   }

@@ -4,6 +4,8 @@ import com.graph.finder.model.Sex;
 import com.graph.finder.model.Person;
 import com.graph.finder.repository.PersonRepository;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +31,14 @@ public class PersonService {
   }
 
 
-  public Person createPerson(int born, String name, Sex sex){
+  public Person createPerson(Person person){
 
-    return personRepository.insertPerson(born, name, sex.name());
+    final Set<String> preferences = person.getPreferences()
+        .stream()
+        .map(Sex::getNameLiteral)
+        .collect(Collectors.toSet());
+
+    return personRepository.insertPerson(person.getBorn(), person.getName(), person.getSex().getNameLiteral(), preferences);
   }
 
   public boolean addFriend(String name, String friendName){

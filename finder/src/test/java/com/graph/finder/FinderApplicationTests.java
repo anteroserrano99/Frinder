@@ -3,6 +3,7 @@ package com.graph.finder;
 
 import com.graph.finder.model.Person;
 import com.graph.finder.repository.PersonRepository;
+import com.graph.finder.service.PersonService;
 import com.graph.finder.test.repository.PersonTestRepository;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,7 +16,7 @@ import utilities.RandomUtilities;
 class FinderApplicationTests {
 
   @Autowired
-  PersonRepository personRepository;
+	PersonService personService;
 
 	@Autowired
 	PersonTestRepository personTestRepository;
@@ -56,7 +57,7 @@ class FinderApplicationTests {
 				p2 = RandomUtilities.getRandomElementFromList(personList);
 			}
 
-			personRepository.addFriend(p1.getName(), p2.getName());
+			personService.addFriend(p1.getName(), p2.getName());
 		}
 
 
@@ -67,7 +68,7 @@ class FinderApplicationTests {
   public void persistPersonList(List<Person> personList){
 
 		for (Person person: personList){
-			personRepository.insertPerson(person.getBorn(), person.getName(), person.getSex().name());
+			personService.createPerson(person);
 		}
 
 	}
