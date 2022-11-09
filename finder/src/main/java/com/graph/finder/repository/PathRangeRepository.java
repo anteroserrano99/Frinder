@@ -6,6 +6,6 @@ import java.util.List;
 public interface PathRangeRepository {
 
 
-  List<Person> getFriendsByDepth(String name, int minDepth, int maxDepth);
+  List<Person> getFriendsByDepth(Person person, int minDepth, int maxDepth);
 
 }

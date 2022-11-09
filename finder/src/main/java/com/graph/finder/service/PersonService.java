@@ -33,12 +33,7 @@ public class PersonService {
 
   public Person createPerson(Person person){
 
-    final Set<String> preferences = person.getPreferences()
-        .stream()
-        .map(Sex::getNameLiteral)
-        .collect(Collectors.toSet());
-
-    return personRepository.insertPerson(person.getBorn(), person.getName(), person.getSex().getNameLiteral(), preferences);
+    return personRepository.insertPerson(person.getBorn(), person.getName(), person.getSex().getNameLiteral(), person.getPreferencesAsString());
   }
 
   public boolean addFriend(String name, String friendName){
@@ -48,6 +43,8 @@ public class PersonService {
 
   public List<Person> getFriendByDepth(String name, int minDepth, int maxDepth){
 
-    return personRepository.getFriendsByDepth(name, minDepth, maxDepth);
+    final Person person = personRepository.getPersonByName(name);
+
+    return personRepository.getFriendsByDepth(person, minDepth, maxDepth);
   }
 }

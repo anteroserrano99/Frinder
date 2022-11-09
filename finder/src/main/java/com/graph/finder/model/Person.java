@@ -1,8 +1,10 @@
 package com.graph.finder.model;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.Data;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
@@ -23,6 +25,16 @@ public class Person {
     this.name = name;
     this.sex = sex;
     this.preferences = preferences;
+  }
+
+  public Set<String> getPreferencesAsString(){
+
+    if (preferences == null) return new HashSet<>();
+
+    return this.getPreferences()
+        .stream()
+        .map(Sex::getNameLiteral)
+        .collect(Collectors.toSet());
   }
 
   public static PersonBuilder builder() {

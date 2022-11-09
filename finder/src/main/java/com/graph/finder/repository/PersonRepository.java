@@ -11,6 +11,10 @@ public interface PersonRepository extends Neo4jRepository<Person, String>, PathR
   @Query("Match (n:Person) RETURN n")
   List<Person> getAllPerson();
 
+  @Query("Match (n:Person {name: $name}) RETURN n")
+  Person getPersonByName(String name);
+
+
   @Query("Merge (n:Person {name: $name, born: $born, sex: $sex, preferences: $preferences}) RETURN n")
   Person insertPerson(int born, String name, String sex, Set<String> preferences);
 
